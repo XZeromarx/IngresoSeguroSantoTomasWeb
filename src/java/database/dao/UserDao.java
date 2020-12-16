@@ -19,7 +19,7 @@ public interface UserDao extends GenericCrud<DBUser> {
 
     DBUser getAllUserBySede(DBSede sede);
 
-    Optional<DBUser> getUserById(int id);
+    List<DBUser> getUserById(int id);
 
     List<DBUser> getLatestEnrollments(int instituteId, int quantity);
 

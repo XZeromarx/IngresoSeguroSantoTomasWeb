@@ -40,6 +40,7 @@ password VARCHAR(40),
 PRIMARY KEY (id)
 );
 
+select * from adminLogin;
 
 INSERT INTO adminLogin VALUES(NULL,'admin',SHA1('123456'));
 -- SELECT COUNT(id) FROM adminLogin WHERE user_name = 'admi' AND password = SHA1('123456');
@@ -91,7 +92,7 @@ INSERT INTO institute VALUES(NULL,'Temuco');
 INSERT INTO institute VALUES(NULL,'Valdivia');
 INSERT INTO institute VALUES(NULL,'Viña del Mar');
 
-
+SELECT id, fullname, rut FROM user WHERE id = 1;
 
 /*
 DROP PROCEDURE IF EXISTS clone_user;
@@ -154,11 +155,30 @@ SELECT user.fullname, user.rut, history.register_date FROM history
 INNER JOIN user ON user.id = history.user_id_fk
 */
 
-SELECT user.fullname, user.rut, history.register_date FROM history INNER JOIN user ON user.id = history.user_id_fk;
-INSERT INTO user VALUES(NULL,'nombre1','11-1',1,0000001111111,1);
-INSERT INTO user VALUES(NULL,'nombre2','22-2',1,0000001111111,1);
-INSERT INTO user VALUES(NULL,'nombre3','33-3',1,0000001111111,1);
+-- SELECT user.fullname, user.rut, history.register_date FROM history INNER JOIN user ON user.id = history.user_id_fk;
+-- INSERT INTO user VALUES(NULL,'nombre1','11-1',1,0000001111111,1);
+-- INSERT INTO user VALUES(NULL,'nombre2','22-2',1,0000001111111,1);
+-- INSERT INTO user VALUES(NULL,'nombre3','33-3',1,0000001111111,1);
+-- 
+-- INSERT INTO history VALUES(NULL,1,NOW());
+-- INSERT INTO history VALUES(NULL,2,NOW());
+-- INSERT INTO history VALUES(NULL,3,NOW());
 
-INSERT INTO history VALUES(NULL,1,NOW());
-INSERT INTO history VALUES(NULL,2,NOW());
-INSERT INTO history VALUES(NULL,3,NOW());
+INSERT INTO history VALUES(NULL,5,NOW());
+INSERT INTO user VALUES(NULL,'nombre5','55-5',2,0000001111111,1);
+
+select * from history;
+
+
+
+delete from history where id = 5;
+delete from user where id = 5;
+
+delete from user u inner join history h on h.user_id_fk = u.id where h.id = 4;
+
+DELETE u
+FROM user u 
+INNER JOIN history h
+    ON u.id = c.user_id_fk
+WHERE c.user_id_fk = 4;
+;

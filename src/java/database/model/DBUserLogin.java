@@ -9,8 +9,8 @@ public class DBUserLogin extends Conexion {
     private String userName;
     private String pass;
 
-    public DBUserLogin(String bd) throws ClassNotFoundException, SQLException {
-        super(bd);
+    public DBUserLogin() throws ClassNotFoundException, SQLException {
+        super("fpdb");
     }
 
     public int getId() {

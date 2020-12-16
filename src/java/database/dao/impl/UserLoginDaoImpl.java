@@ -7,11 +7,13 @@ package database.dao.impl;
 
 import database.Conexion;
 import database.dao.GenericCrud;
-import database.dao.UserDao;
 import database.model.DBUserLogin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +21,8 @@ import java.util.List;
  */
 public class UserLoginDaoImpl extends Conexion implements GenericCrud<DBUserLogin> {
 
-    public UserLoginDaoImpl(String bd) throws ClassNotFoundException, SQLException {
-        super(bd);
+    public UserLoginDaoImpl() throws ClassNotFoundException, SQLException {
+        super("fpdb");
     }
 
     @Override

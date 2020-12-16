@@ -7,9 +7,12 @@ package database.dao.impl;
 
 import database.Conexion;
 import database.dao.UserDao;
+import database.model.DBHistory;
 import database.model.DBSede;
 import database.model.DBUser;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -31,8 +34,28 @@ public class UserDaoImpl extends Conexion implements UserDao {
     }
 
     @Override
-    public Optional<DBUser> getUserById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<DBUser> getUserById(int id) {
+        List<DBUser> list = new ArrayList<>();
+        try {
+
+            ResultSet rs = ejecutar("SELECT id, fullname, rut FROM user WHERE id = " + id + ";");
+
+            DBUser dbu;
+
+            while (rs.next()) {
+                dbu = new DBUser();
+                dbu.setId(rs.getInt(1));
+                dbu.setFullname(rs.getString(2));
+                dbu.setRut(rs.getString(3));
+
+                list.add(dbu);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
     @Override

@@ -5,16 +5,28 @@ public class DBHistory {
     private String userName;
     private String userRut;
     private String registerDate;
+    private String userType;
 
     public DBHistory() {
     }
 
-    public DBHistory(int userId, String userName, String userRut, String registerDate) {
+    public DBHistory(int userId, String userName, String userRut, String registerDate, String userType) {
         this.userId = userId;
         this.userName = userName;
         this.userRut = userRut;
         this.registerDate = registerDate;
+        this.userType = userType;
     }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+    
+    
 
     public int getUserId() {
         return userId;

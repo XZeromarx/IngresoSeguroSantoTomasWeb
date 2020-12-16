@@ -14,23 +14,62 @@
         <title>Todos los registros</title>
     </head>
     <body>
-        <h1 class="title">Todos los registros</h1>
+
+
         <%
             HistoryDaoImpl daoImpl = new HistoryDaoImpl();
         %>
 
 
 
-        <ol>
-            <%for (DBHistory record : daoImpl.getAll()) {%>
-            <li>Nombre: <%= record.getUserName()%>   </li>
-            <li>Rut: <%= record.getUserRut()%></li>
-            <li>Fecha Registro: <%= record.getRegisterDate()%></li>
-            <a>--------------------------------------------------</a>
 
-            <%}%> 
 
-        </ol>
+        <div class="columns">
+            <div class="column is-5"></div>
+            <div class="column is-2">
+                <h1 class="title is-centered">Todos los registros</h1>
+            </div>
+            <div class="column is-5"></div>
+        </div>
+
+
+        <div class="columns">
+            <div class="column is-2"></div>
+            <div class="column is-8">
+
+
+                <table class= "table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Rut</th>
+                        <th>Fecha Registro</th>
+                        <th>Editar</th>
+
+                    </tr>
+                    <%for (DBHistory record : daoImpl.getAll()) {%>
+
+                    <tr>
+                        <th><%= record.getUserName()%></th>
+                        <th><%= record.getUserRut()%></th>
+                        <th><%= record.getRegisterDate()%></th>
+                        <th><form action="editarRegistro.jsp">
+                                <input type="hidden" value="<%= record.getUserId()%>" name="idUser">
+
+                                <button type="submit" class="button is-rounded is-warning is-hoverable">Editar Registro</button></form>
+                        </th>
+
+                    </tr>
+                    <%}%> 
+
+                    <p class='select-css' id='nombre' name='txtNombre'> </p>
+
+                </table>
+
+            </div>
+            <div class="column is-2"></div>
+        </div>
+
+
 
         <p class="level-item"><strong> <a href="menuPrincipal.jsp">Volver</a> </strong></p>
 
