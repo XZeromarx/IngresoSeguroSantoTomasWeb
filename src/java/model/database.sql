@@ -40,11 +40,11 @@ password VARCHAR(40),
 PRIMARY KEY (id)
 );
 
-select * from adminLogin;
+
 
 INSERT INTO adminLogin VALUES(NULL,'admin',SHA1('123456'));
 -- SELECT COUNT(id) FROM adminLogin WHERE user_name = 'admi' AND password = SHA1('123456');
-
+SELECT * FROM adminLogin;
 -- UPDATE user SET fullname = 'X', rut = 'X' WHERE id = x
 -- DELETE FROM usuario WHERE id = x
 
@@ -164,21 +164,29 @@ INNER JOIN user ON user.id = history.user_id_fk
 -- INSERT INTO history VALUES(NULL,2,NOW());
 -- INSERT INTO history VALUES(NULL,3,NOW());
 
-INSERT INTO history VALUES(NULL,5,NOW());
-INSERT INTO user VALUES(NULL,'nombre5','55-5',2,0000001111111,1);
+-- INSERT INTO history VALUES(NULL,5,NOW());
+-- INSERT INTO user VALUES(NULL,'nombre5','55-5',2,0000001111111,1);
+-- 
+-- select * from history;
+-- 
+-- 
+-- 
+-- delete from history where id = 5;
+-- delete from user where id = 5;
+-- 
+-- delete from user u inner join history h on h.user_id_fk = u.id where h.id = 4;
+-- 
+-- DELETE u
+-- FROM user u 
+-- INNER JOIN history h
+--     ON u.id = c.user_id_fk
+-- WHERE c.user_id_fk = 4;
+-- ;
 
-select * from history;
 
 
-
-delete from history where id = 5;
-delete from user where id = 5;
-
-delete from user u inner join history h on h.user_id_fk = u.id where h.id = 4;
-
-DELETE u
-FROM user u 
-INNER JOIN history h
-    ON u.id = c.user_id_fk
-WHERE c.user_id_fk = 4;
-;
+SELECT user.id, user.fullname, user.rut, history.register_date, user_type.name FROM history
+INNER JOIN user ON user.id = history.user_id_fk
+INNER JOIN user_type ON user.user_type_id_fk = user_type.id
+WHERE user.institute_fk = 'x'
+ORDER BY history.register_date;

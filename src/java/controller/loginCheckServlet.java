@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,16 +33,18 @@ public class loginCheckServlet extends HttpServlet {
         String name, pass;
         name = request.getParameter("nombre");
         pass = request.getParameter("clave");
-       
-        
+
         try {
             UserLoginDaoImpl uldi = new UserLoginDaoImpl();
+
             if (uldi.isValid(name, pass)) {
+
                 response.sendRedirect("menuPrincipal.jsp");
+
             } else {
-                response.sendError(1,"Clave o Usuario incorrecto");
-                               
-                
+
+                response.sendError(1);
+
             }
 
         } catch (ClassNotFoundException | SQLException ex) {

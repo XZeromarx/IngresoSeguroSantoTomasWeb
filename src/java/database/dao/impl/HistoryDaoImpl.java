@@ -5,9 +5,11 @@
  */
 package database.dao.impl;
 
+import config.FPConfig;
 import database.Conexion;
 import database.dao.DaoHistorial;
 import database.model.DBHistory;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,27 +42,37 @@ public class HistoryDaoImpl extends Conexion implements DaoHistorial {
 
     @Override
     public List<DBHistory> getAll() throws SQLException {
+        FPConfig config;
         List<DBHistory> list = new ArrayList<>();
-        rs = ejecutar("SELECT user.id, user.fullname, user.rut, history.register_date, user_type.name FROM history\n" +
-                        "INNER JOIN user ON user.id = history.user_id_fk\n" +
-                        "INNER JOIN user_type ON user.user_type_id_fk = user_type.id\n" +
-                        "ORDER BY history.register_date;");
 
-        DBHistory dbh;
+        try {
+            config = new FPConfig();
 
-        while (rs.next()) {
-            dbh = new DBHistory();
-            dbh.setUserId(rs.getInt(1));
-            dbh.setUserName(rs.getString(2));
-            dbh.setUserRut(rs.getString(3));
-            dbh.setRegisterDate(rs.getString(4));
-            dbh.setUserType(rs.getString(5));
+            rs = ejecutar("SELECT user.id, user.fullname, user.rut, history.register_date, user_type.name FROM history\n"
+                    + "INNER JOIN user ON user.id = history.user_id_fk\n"
+                    + "INNER JOIN user_type ON user.user_type_id_fk = user_type.id\n"
+                    + "WHERE user.institute_fk = " + config.getInstituteId() + "\n"
+                    + "ORDER BY history.register_date;");
 
-            list.add(dbh);
+            DBHistory dbh;
 
+            while (rs.next()) {
+                dbh = new DBHistory();
+                dbh.setUserId(rs.getInt(1));
+                dbh.setUserName(rs.getString(2));
+                dbh.setUserRut(rs.getString(3));
+                dbh.setRegisterDate(rs.getString(4));
+                dbh.setUserType(rs.getString(5));
+
+                list.add(dbh);
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(HistoryDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return list;
+
     }
 
     @Override

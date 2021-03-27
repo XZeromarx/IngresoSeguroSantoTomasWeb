@@ -54,7 +54,7 @@ public class ActualizarUserServlet extends HttpServlet {
             d.setRut(rut);
             d.setId(id);
             udi.update(d);
-            response.sendRedirect("allHistoryRec.jsp");
+            response.sendRedirect("menuPrincipal.jsp");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ActualizarUserServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
